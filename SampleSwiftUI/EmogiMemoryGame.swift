@@ -11,7 +11,7 @@ class EmogiMemoryGame {
     private var model: MemoryGame<String> = createMemoryGame()
     
     static func createMemoryGame() -> MemoryGame<String> {
-        let emogis = ["🤣","🎃"]
+        let emogis = ["🤣","🎃","🏀","🐶"]
         return MemoryGame<String>.init(numberOfPairs: emogis.count) { (index) -> String in
             return emogis[index]
         }

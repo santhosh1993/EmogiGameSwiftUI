@@ -17,6 +17,8 @@ struct MemoryGame<CardContent> {
             cards.append(Card.init(id: 2 * pairIndex, content: content))
             cards.append(Card.init(id: 2 * pairIndex + 1, content: content))
         }
+
+        cards.shuffle()
     }
     
     func choose(card: Card) {
