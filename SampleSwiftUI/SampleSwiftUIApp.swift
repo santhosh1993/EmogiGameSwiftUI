@@ -13,7 +13,7 @@ struct SampleSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: EmogiMemoryGame())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
