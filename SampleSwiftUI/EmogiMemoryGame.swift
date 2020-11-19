@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-class EmogiMemoryGame {
-    private var model: MemoryGame<String> = createMemoryGame()
+class EmogiMemoryGame: ObservableObject {
+    @Published private var model: MemoryGame<String> = createMemoryGame()
     
     static func createMemoryGame() -> MemoryGame<String> {
         let emogis = ["🤣","🎃","🏀","🐶"]

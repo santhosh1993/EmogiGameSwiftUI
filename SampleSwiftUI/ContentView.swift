@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    var viewModel: EmogiMemoryGame
+    @ObservedObject var viewModel: EmogiMemoryGame
     
     var body: some View {
         HStack(spacing: 5){
@@ -28,17 +28,25 @@ struct ContentView: View {
 struct CardView: View {
     var card: MemoryGame<String>.Card
     var body: some View {
-        ZStack{
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius:10).stroke(lineWidth: 3)
-                Text(card.content)
+        GeometryReader { geometry  in
+            ZStack{
+                if card.isFaceUp {
+                    RoundedRectangle(cornerRadius:cornerRadius).stroke(lineWidth: edgeLineWidth)
+                    Text(card.content)
+                }
+                else {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
-            else {
-                RoundedRectangle(cornerRadius: 10).fill()
-            }
+            .font(Font.system(size: min(geometry.size.width, geometry.size.height) * scaleFactor))
         }
-        .font(Font.largeTitle)
     }
+    
+    //MARK:- Drawing Constants
+    
+    let cornerRadius: CGFloat = 10
+    let edgeLineWidth: CGFloat = 3
+    let scaleFactor: CGFloat = 0.75
 }
 
 struct ContentView_Previews: PreviewProvider {

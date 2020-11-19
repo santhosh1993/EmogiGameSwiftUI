@@ -21,8 +21,24 @@ struct MemoryGame<CardContent> {
         cards.shuffle()
     }
     
-    func choose(card: Card) {
+    mutating func choose(card: Card) {
         print("card chosen: \(card)")
+        do {
+            let ind = try index(of: card)
+            cards[ind].isFaceUp = !cards[ind].isFaceUp
+        }
+        catch {
+            
+        }
+    }
+    
+    func index(of card: Card) throws -> Int {
+        for index in 0..<cards.count {
+            if cards[index].id == card.id {
+                return index
+            }
+        }
+        throw NotFound.index
     }
     
     struct Card: Identifiable{
@@ -31,5 +47,9 @@ struct MemoryGame<CardContent> {
         var isFaceUp: Bool = true
         var isMatched: Bool = false
         var content: CardContent
+    }
+    
+    enum NotFound: Error {
+        case index
     }
 }
